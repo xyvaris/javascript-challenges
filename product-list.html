@@ -18,6 +18,7 @@
           <td>Name</td>
           <td>Price</td>
           <td>Status</td>
+          <td>Action</td>
         </tr>
       </thead>
       <!-- body -->
@@ -30,54 +31,82 @@
       // Input Box
       const inputName = document.getElementById("inputName");
       const inputPrice = document.getElementById("inputPrice");
+
       // Button
       const addBtn = document.getElementById("addBtn");
-      // table body
+
+      // Table body
       const showData = document.getElementById("showData");
       const showPrice = document.getElementById("showPrice");
 
-      // Store the all products
+      // Store all products
       const products = [];
 
       addBtn.addEventListener("click", addProduct);
 
       function addProduct() {
-        const productName = inputName.value;
+        const productName = inputName.value.trim();
         const productPrice = Number(inputPrice.value);
-        const productStatus = productPrice > 1000 ? "Expensive" : "Affordable";
 
-        if (productName === "" || isNaN(productPrice))
-          return alert("Please input the name of product and price.");
+        if (productName === "" || isNaN(productPrice)) {
+          return alert("Please input the product name and price.");
+        }
+
+        const product = {
+          name: productName,
+          price: productPrice,
+        };
 
         const tr = document.createElement("tr");
 
         const dataName = document.createElement("td");
         const dataPrice = document.createElement("td");
         const dataStatus = document.createElement("td");
+        const dataAction = document.createElement("td");
 
-        dataName.textContent = productName;
-        dataPrice.textContent = productPrice;
-        dataStatus.textContent = productStatus;
+        dataName.textContent = product.name;
+        dataPrice.textContent = product.price;
+        dataStatus.textContent =
+          product.price > 1000 ? "Expensive" : "Affordable";
+
+        const deleteBtn = createDeleteButton(tr, product);
+        dataAction.appendChild(deleteBtn);
 
         tr.appendChild(dataName);
         tr.appendChild(dataPrice);
         tr.appendChild(dataStatus);
+        tr.appendChild(dataAction);
 
         showData.appendChild(tr);
-        // store to products
-        products.push({
-          name: productName,
-          price: productPrice,
-        });
+
+        products.push(product);
 
         load();
+      }
+
+      function createDeleteButton(tr, product) {
+        const btnDelete = document.createElement("button");
+        btnDelete.textContent = "Delete";
+
+        btnDelete.addEventListener("click", () => {
+          const index = products.indexOf(product);
+
+          if (index !== -1) {
+            products.splice(index, 1);
+          }
+
+          tr.remove();
+          load();
+        });
+
+        return btnDelete;
       }
 
       function load() {
         inputName.value = "";
         inputPrice.value = "";
 
-        const total = products.reduce((sum, { price }) => sum + price, 0);
+        const total = products.reduce((sum, product) => sum + product.price, 0);
 
         showPrice.textContent = `Total Price: ${total}`;
       }
