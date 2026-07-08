@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Product List app</title>
+</head>
+<body>
+  <input id="inputName" type="text">
+  <input id="inputPrice" type="text">
+  <button id="addBtn">Add Product</button>
+  <table>
+    <!-- header -->
+    <thead>
+      <tr>
+        <td>Name</td>
+        <td>Price</td>
+        <td>Status</td>
+      </tr>
+    </thead>
+    <!-- body -->
+    <tbody id="showData">
+      <tr>
+        <td>Sample</td>
+        <td>Sample</td>
+        <td>Sample</td>
+      </tr>
+    </tbody>
+  </table>
+  <!-- Show Total Price -->
+  <p id="showPrice">Total Price: </p>
+
+
+  <script>
+    // Input Box
+    const inputName = document.getElementById('inputName');
+    const inputPrice = document.getElementById('inputPrice');
+    // Button
+    const addBtn = document.getElementById('addBtn');
+    // table body
+    const showData = document.getElementById('showData');
+    const showPrice = document.getElementById('showPrice');
+
+    addBtn.addEventListener('click', addProduct);
+
+    function addProduct() {
+      if (inputName.value === '' || Number(inputPrice.value) === '') return 'Please input the name of product and price.';
+
+      const tr = document.createElement('tr');
+
+      const dataName = document.createElement('td');
+      const dataPrice = document.createElement('td');
+      const dataStatus = document.createElement('td');
+
+      dataName.textContent = inputName.value;
+      dataPrice.textContent = Number(inputPrice.value);
+
+      tr.appendChild(dataName);
+      tr.appendChild(dataPrice);
+
+      showData.appendChild(tr);
+
+      showPrice.appendChild(dataPrice);
+
+      inputName.value = '';
+      inputPrice.value = '';
+    }
+    
+  </script>
+</body>
+</html>
