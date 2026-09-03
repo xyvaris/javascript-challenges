@@ -1,8 +1,8 @@
 function squareSum(numbers){
-  const newNum = numbers.map(n => n * 2);
-  const total = newNum.forEach( n => n + n);
+  const newNum = numbers.map(n => n * n);
+  // const total = newNum.forEach( n => n + n);
 
-  return total;
+  return newNum;
   // if (total === num) return true; else return false;
 }
 
