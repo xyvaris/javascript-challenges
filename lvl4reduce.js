@@ -7,22 +7,29 @@ const employees = [
   { name: "Usopp", department: "HR", salary: 22000, active: false }
 ];
 
-const getActiveInactive = employees.reduce((acc, {department, active, name}) => {
-  if (!acc[department]) {
+const employeeInfo = employees.reduce((acc, {department, salary, active, name}) => {
+  if(!acc[department]) {
     acc[department] = {
-      active: [],
-      inactive: []
+      active: {
+        employees: [],
+        payroll: 0
+      },
+      inactive: {
+        employees: [],
+        payroll: 0
+      }
     }
   }
 
-  if(active) {
-    acc[department].active.push(name);
+  if (active) {
+    acc[department].active.employees.push(name);
+    acc[department].active.payroll += salary;
   } else {
-    acc[department].inactive.push(name);
+    acc[department].inactive.employees.push(name);
+    acc[department].inactive.payroll += salary;
   }
 
   return acc;
-
 },{});
 
-console.log(getActiveInactive);
+console.log(JSON.stringify(employeeInfo, null, 2));
