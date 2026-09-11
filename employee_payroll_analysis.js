@@ -28,16 +28,16 @@ const departmentSalaryTotals = employees.reduce((acc, {department, salary, statu
 },{})
 
 let highestSalary = 0;
-let highestDepartment = ""
+let highestDepartment = "";
 
-Object.keys(departmentSalaryTotals).forEach(dept => {
+Object.entries(departmentSalaryTotals).forEach(([dept, salary]) => {
 
-  let currentSalary = departmentSalaryTotals[dept]
-
-  if (currentSalary > highestSalary) {
-    highestSalary = currentSalary;
+  if (salary > highestSalary) {
+    highestSalary = salary;
     highestDepartment = dept;
   }
 
-})
+});
+
 console.log(highestDepartment);
+
