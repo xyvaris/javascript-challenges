@@ -56,7 +56,10 @@ const countActiveDept = employees
   return acc;
 },{})
 
+
 console.log(countActiveDept);
+
+// Get the hight count of active using Object.entries and forEach
 
 let currentActive = 0;
 let dept = '';
@@ -73,4 +76,13 @@ console.log(dept);
 
 console.log(currentActive,dept);
 
+// Get the hight count of active using Object.entries and reduce
 
+const highestDepartment = Object.entries(countActiveDept)
+  .reduce((highest, [department, count]) => {
+
+    // ikaw dito
+
+  }, []);
+
+console.log(highestDepartment);
