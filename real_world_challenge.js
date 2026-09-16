@@ -81,8 +81,16 @@ console.log(currentActive,dept);
 const highestDepartment = Object.entries(countActiveDept)
   .reduce((highest, [department, count]) => {
 
-    // ikaw dito
 
-  }, []);
+    if(count > highest.count) {
+      highest.department = department;
+      highest.count = count;
+    }
+
+    return highest;
+  }, highest = {
+      department: '',
+      count: 0
+    });
 
 console.log(highestDepartment);
