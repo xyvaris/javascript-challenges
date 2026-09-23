@@ -106,4 +106,54 @@ const payrollReport = activeEmployees.reduce((acc, {department, salary}) => {
 
 console.log(payrollReport);
 
+// Challenge #8 — Highest Average Salary Department
+
+const highestAvgSalaryDept = Object.entries(payrollReport)
+  .reduce((acc, [department,departmentData]) => {
+    if(departmentData.totalAvgSalary > acc.averageSalary) {
+      acc.department = department;
+      acc.averageSalary = departmentData.totalAvgSalary;
+    }
+
+    return acc;
+  },{
+        department: '',
+        averageSalary: 0
+      })
+
+  console.log(highestAvgSalaryDept);
+
+  // Challenge #9 — Department Salary Classification
+  
+const deptSalaryClassification = Object.entries(payrollReport).reduce((acc, [department,deptData]) => {
+   
+    acc[department] = {
+      averageSalary: deptData.totalAvgSalary,
+      salaryLevel: deptData.totalAvgSalary >= 30000 ? "High":"Normal"
+    }
+
+  //  if(deptData.totalAvgSalary >= 30000) acc[department].salaryLevel = 'High'
+  //  else acc[department].salaryLevel = 'Normal';
+   
+
+   return acc;
+},{})
+
+console.log(deptSalaryClassification);
+
+// Challenge #10 — Department Payroll Status
+
+const payrollStatus = Object.entries(payrollReport).reduce((acc,[department,deptData]) => {
+  
+    acc[department] = {
+      totalSalary: deptData.totalSalary,
+      employeeCount: deptData.count,
+      status: deptData.count >= 3 ? 'Large Payroll':'Small Payroll'
+    }
+
+  return acc;
+},{})
+
+console.log(payrollStatus);
+
 
