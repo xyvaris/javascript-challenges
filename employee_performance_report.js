@@ -30,3 +30,19 @@ const payrollReport = activeEmployees.reduce((acc, {department, salary}) => {
 },{})
 
 console.log(payrollReport);
+
+// Challenge #12 — Department Salary Analysis
+
+const deptSalaryAnalysis = Object.entries(payrollReport).reduce((acc, [department, deptData]) => {
+  if (deptData.totalSalary > acc.totalSalary) {
+    acc.department = department;
+    acc.totalSalary = deptData.totalSalary
+  }
+
+  return acc;
+},{
+  department: '',
+  totalSalary: 0
+})
+
+console.log(deptSalaryAnalysis);
