@@ -1,3 +1,5 @@
+// Challenge #14 — Department Eligibility Report
+
 const employees = [
   { name: "Luffy", department: "IT", status: "active", salary: 30000 },
   { name: "Zoro", department: "HR", status: "active", salary: 25000 },
@@ -11,54 +13,36 @@ const employees = [
 
 const activeEmployees = employees.filter(({status}) => status === 'active');
 
-console.log(activeEmployees);
-
-const payrollReport = activeEmployees.reduce((acc, {department, salary}) => {
-  if(!acc[department]) {
+const employeesData = activeEmployees.reduce((acc, {department, salary}) => {
+  if (!acc[department]) {
     acc[department] = {
       employeeCount: 1,
       totalSalary: salary,
       averageSalary: salary
     }
-  }else {
+  } else {
     acc[department].employeeCount += 1;
-    acc[department].totalSalary += salary
+    acc[department].totalSalary += salary;
     acc[department].averageSalary = acc[department].totalSalary / acc[department].employeeCount;
   }
 
   return acc;
 },{})
 
-console.log(payrollReport);
 
-// Challenge #12 — Department Salary Analysis
-
-const deptSalaryAnalysis = Object.entries(payrollReport).reduce((acc, [department, deptData]) => {
-  if (deptData.totalSalary > acc.totalSalary) {
-    acc.department = department;
-    acc.totalSalary = deptData.totalSalary
-  }
-
-  return acc;
-},{
-  department: '',
-  totalSalary: 0
-})
-
-console.log(deptSalaryAnalysis);
-
-// Challenge #13 — Department Payroll Ranking Data
-
-const rankingData = Object.entries(payrollReport).reduce((acc, [department, deptData]) => {
-
+const eligibilityReport = Object.entries(employeesData).reduce((acc,[department, deptData]) => {
   acc[department] = {
     employeeCount: deptData.employeeCount,
+    totalSalary: deptData.totalSalary,
     averageSalary: deptData.averageSalary,
-    payrollStatus: deptData.employeeCount >= 3 ? "Large Payroll":"Small Payroll",
-    salaryStatus: deptData.averageSalary >= 30000 ? "High Salary":"Normal Salary"
+    eligibility: deptData.employeeCount >= 2 && deptData.averageSalary >= 28000 ? "Eligible":"Not Eligible"
   }
 
   return acc;
 },{});
 
-console.log(rankingData);
+console.log(eligibilityReport);
+
+
+
+
