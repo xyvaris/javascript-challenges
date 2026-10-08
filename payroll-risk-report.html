@@ -4,26 +4,30 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Payroll Risk Report — Web Version</title>
+
+  <!-- style tailwind -->
+   <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
 </head>
 <body>
-  <header>
+  <header class="my-10">
     <h1>Payroll Risk Report</h1>
-    <button id="showAll">Show All</button>
-    <button id="showInactive">Show Inactive</button>
-    <button id="showActive">Show Active</button>
+    <button class="bg-cyan-600 text-zinc-50 px-8 hover:bg-cyan-800 transition duration-150" id="showAll">Show All</button>
+    <button class="bg-red-300 text-red-950 px-8 hover:bg-red-600 hover:text-red-50 transition duration-150" id="showInactive">Show Inactive</button>
+    <button class="bg-green-300 text-green-950 px-8 hover:bg-green-600 hover:text-green-50 transition duration-150" id="showActive">Show Active</button>
     <section>
       <ul id="showEmployees"></ul>
     </section>
   </header>
   <main>
-    <table style="border-collapse: collapse;">
+    <table class="border-collapse">
       <thead>
         <tr>
-          <th>Department</th>
-          <th>Employees</th>
-          <th>Total Salary</th>
-          <th>Avg Salary</th>
-          <th>Risk</th>
+          <th class="border border-gray-300 p-3">Department</th>
+          <th class="border border-gray-300 p-3">Employees</th>
+          <th class="border border-gray-300 p-3">Total Salary</th>
+          <th class="border border-gray-300 p-3">Avg Salary</th>
+          <th class="border border-gray-300 p-3">Risk</th>
         </tr>
       </thead>
       <tbody id="dataTable">
@@ -33,5 +37,6 @@
   </main>
 
   <script src="payroll_risk_report.js"></script>
+  <script src="tailwind.config.js"></script>
 </body>
 </html>
