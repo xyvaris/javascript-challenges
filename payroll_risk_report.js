@@ -39,3 +39,14 @@ function renderEmployees(filterType) {
 showAllBtn.addEventListener('click', () => renderEmployees('All'));
 showActiveBtn.addEventListener('click', () => renderEmployees('active'));
 showInactiveBtn.addEventListener('click', () => renderEmployees('inactive'));
+
+renderEmployees('All');
+
+// Display data in table
+const dataTable = document.getElementById('dataTable');
+
+const employeesActive = employees.filter(({status}) => status === 'active');
+
+
+
+
